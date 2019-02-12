@@ -1,15 +1,11 @@
 {% extends 'music/base.html' %}
-{% block title %}Viberr{% endblock %}
 
 {% block body %}
-    {% if all_albums %}
-        <h3>Your Collection</h3>
-        <ul>
-            {% for album in all_albums %}
-                <li><a href="{% url 'music:detail' album.id %}">{{ album.title }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>You don't have any albums!</h3>
-    {% endif %}
+
+    <ul>
+        {% for album in all_albums %}
+            <li><a href="{% url 'music:detail' album.id %}">{{ album.title }}</a></li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
