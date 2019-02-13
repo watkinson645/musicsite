@@ -5,7 +5,7 @@ class Album(models.Model):
     artist = models.CharField(max_length=256)
     title = models.CharField(max_length=256)
     genre = models.CharField(max_length=256)
-    logo = models.CharField(max_length=1000)
+    logo = models.FileField()
 
     def get_absolute_url(self):
         return reverse('music:detail', kwargs={'pk': self.pk})

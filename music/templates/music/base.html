@@ -47,11 +47,21 @@
 
             <!-- Header Right Side -->
             <ul class="nav navbar-nav navbar-right">
+                <!-- Add Album -->
                 <li class="">
                     <a href="{% url 'music:album-add' %}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Album
                     </a>
                 </li>
+
+                <!-- Admin panel -->
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp; Admin
+                    </a>
+                </li>
+
+                <!-- Logout -->
                 <li class="">
                     <a href="#">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout

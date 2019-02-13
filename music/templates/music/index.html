@@ -14,8 +14,10 @@
                 {% for album in all_albums %}
                     <div class="col-sm-4 col-lg-2">
                         <div class="thumbnail">
+
+                            <!-- Album Logo -->
                             <a href="{% url 'music:detail' album.id %}">
-                                <img src="{{ album.logo }}" class="img-responsive" style="width: 250px;height:250px">
+                                <img src="{{ album.logo.url }}" class="img-responsive" style="width: 250px;height:250px">
                             </a>
                             <div class="caption">
                                 <h2>{{ album.album_title }}</h2>
