@@ -2,7 +2,11 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Album, Song
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serial import AlbumSerial
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
@@ -17,6 +21,22 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Album
     template_name = 'music/detail.html'
+
+
+# List all albums or create new
+# /music/all
+class AlbumList(APIView):
+
+    # retrieve all albums
+    def get(self, request):
+        albums = Album.objects.all()
+        serializer = AlbumSerial(albums, many=True)
+        return Response(serializer.data)
+
+    # create new album
+    def post(self, request):
+        pass
+
 
 class AlbumCreate(CreateView):
     model = Album
