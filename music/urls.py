@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^login/$', views.LoginFormView.as_view(), name='login'),
 
     # /music/logout - Logout and redirect
-    url(r'^logout/$', LogoutView.as_view(), {'template_name': 'logout.html'},name='logout'),
+    url(r'^logout/$', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
     # /music/all/ - View all albums in JSON (REST API)
     url(r'all/$', views.AlbumList.as_view()),
