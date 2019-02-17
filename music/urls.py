@@ -37,14 +37,14 @@ urlpatterns = [
 
 
 
-    # /music/album/song/add/ - Create new song
-    url(r'album/song/add/$', views.SongCreate.as_view(), name='song-add'),
+    # /music/song/add/ - Create new song
+    url(r'song/add/$', views.SongCreate.as_view(), name='song-add'),
 
-    # /music/album/song/<song_id>/ - Update song
-    url(r'album/song/(?P<pk>[0-9]+)/$', views.SongUpdate.as_view(), name='song-update'),
+    # /music/song/<song_id>/ - Update song
+    url(r'song/(?P<pk>[0-9]+)/$', views.SongUpdate.as_view(), name='song-update'),
 
-    # /music/album/song/<song_id>/delete/ - Delete song
-    url(r'album/song/(?P<pk>[0-9]+)/delete/$', views.SongDelete.as_view(), name='song-delete'),
+    # /music/song/<song_id>/delete/ - Delete song
+    url(r'song/(?P<pk>[0-9]+)/delete/$', views.SongDelete.as_view(), name='song-delete'),
 
 
 
