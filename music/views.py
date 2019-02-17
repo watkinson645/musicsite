@@ -9,7 +9,7 @@ from rest_framework import status
 from .serial import AlbumSerial
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
-from .forms import UserForm
+from .forms import UserForm, LoginForm
 
 class IndexView(generic.ListView):
     template_name = 'music/index.html'
@@ -85,3 +85,29 @@ class UserFormView(View):
                     return redirect('music:index')
 
         return render(request, self.template_name, {'form':form})
+
+class LoginFormView(View):
+    form_class = LoginForm
+    template_name = 'music/login.html'
+
+    # display blank form
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form' : form })
+
+    # process form data
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('music:index')
+
+        return render(request, self.template_name, {'form' : form })
