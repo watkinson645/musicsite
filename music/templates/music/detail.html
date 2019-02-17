@@ -27,13 +27,10 @@
             <div class="col-sm-8 col-md-9">
                 <ul class="nav nav-pills" style="margin-bottom: 10px;">
                     <li role="presentation" class="active">
-                        <a href="{% url 'music:detail' album.id %}">View All</a>
+                        <a href="{% url 'music:song-add' %}">Add New Song</a>
                     </li>
                     <li role="presentation" class="active">
-                        <a href="#">Add New Song</a>
-                    </li>
-                    <li role="presentation" class="active">
-                        <a href="{% url 'music:album-update' album.id %}">Edit</a>
+                        <a href="{% url 'music:album-update' album.id %}">Edit Album</a>
                     </li>
                 </ul>
 
@@ -55,9 +52,11 @@
                             </tr>
                             </thead>
                             <tbody>
+                                <!-- Songs table -->
                                 {% for song in album.song_set.all %}
                                     <tr>
                                     <td>{{ song.title }}</td>
+                                    <!-- Audio File -->
                                     <td>
                                         <a target="_blank" href="{{ song.audio_file.url }}">
                                             <button type="button" class="btn btn-success btn-xs">
@@ -65,13 +64,21 @@
                                             </button>
                                         </a>
                                     </td>
+                                    <!-- Favourite -->
                                     <td>
                                         <a href="#" class="btn-favorite">
                                             <span class="glyphicon glyphicon-star {% if song.is_favourite %}active{% endif %}"></span>
                                         </a>
                                     </td>
+                                    <!-- Actions -->
                                     <td>
-                                        <form action="#" method="post" style="display: inline;">
+                                        <!-- Edit -->
+                                        <a href="{% url 'music:song-update' song.id %}" class="btn btn-warning btn-xs">
+                                            <span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit
+                                        </a>
+
+                                        <!-- Delete -->
+                                        <form action="{% url 'music:song-delete' song.id %}" method="post" style="display: inline;">
                                             {% csrf_token %}
                                             <input type="hidden" name="song_id" value="{{ song.id }}" />
                                             <button type="submit" class="btn btn-danger btn-xs">

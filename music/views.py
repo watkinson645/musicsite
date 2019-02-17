@@ -50,6 +50,20 @@ class AlbumDelete(DeleteView):
     model = Album
     success_url = reverse_lazy('music:index')
 
+class SongCreate(CreateView):
+    model = Song
+    fields = ['album', 'title']
+
+class SongUpdate(UpdateView):
+    model = Song
+    fields = ['album', 'title']
+
+class SongDelete(DeleteView):
+    model = Song
+
+    # try to redirect back to album associated with song
+    success_url = reverse_lazy('music:index')
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'music/signup.html'
